@@ -1,7 +1,5 @@
-/**
- * Created by EG OLIVER RC on 7/20/2017.
- */
-public class Triplet {
+
+public class Triplet implements Comparable<Triplet> {
 
     private int min;
     private int med;
@@ -53,12 +51,62 @@ public class Triplet {
         return max;
     }
 
-    @Override
-    public String toPrint(){
-        System.out.println(this.min + " " + this.med + " " + this.max);
+    public boolean isZeroSum(){
+        return this.min + this.med + this.max == 0;
     }
 
-    public boolean isIdentical (Triplet testTriplet){
-        return this.min == testTriplet.getMin() && this.med == testTriplet.getMed() && this.max == testTriplet.getMax();
+    @Override
+    public String toString(){
+        return this.min + " " + this.med + " " + this.max;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+
+        if (getClass() != object.getClass()) {
+            return false;
+        }
+
+        Triplet compared = (Triplet) object;
+
+        if (this.min != compared.getMin()) {
+            return false;
+        }
+
+        if (this.med != compared.getMed()) {
+            return false;
+        }
+
+        if (this.max != compared.getMax()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int compareTo(Triplet comparedTriplet) {
+        if (this.min < comparedTriplet.getMin()){
+            return -1;
+        } else if (this.min > comparedTriplet.getMin()) {
+            return 1;
+        } else {
+            if (this.med < comparedTriplet.getMed()){
+                return -1;
+            } else if (this.med > comparedTriplet.getMed()) {
+                return 1;
+            } else {
+                if (this.max < comparedTriplet.getMax()){
+                    return -1;
+                } else if (this.max > comparedTriplet.getMax()) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        }
     }
 }
